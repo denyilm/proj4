@@ -105,8 +105,6 @@ static char* pj_replace_point_by_locale_point(const char* pszNumber, char point,
             }
         }
     }
-#endif
-    return (char*) pszNumber;
 }
 
 /************************************************************************/
