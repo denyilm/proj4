@@ -75,33 +75,6 @@ double pj_atof( const char* nptr )
 static char* pj_replace_point_by_locale_point(const char* pszNumber, char point,
                                               char* pszWorkBuffer)
 {
-#if !defined(HAVE_LOCALECONV)
-#warning "localeconv not available"
-    static char byPoint = 0;
-    if (byPoint == 0)
-    {
-        char szBuf[16];
-        sprintf(szBuf, "%.1f", 1.0);
-        byPoint = szBuf[1];
-    }
-    if (point != byPoint)
-    {
-        const char* pszPoint = strchr(pszNumber, point);
-        if (pszPoint)
-        {
-            char* pszNew;
-            if( strlen(pszNumber) < PJ_STRTOD_WORK_BUFFER_SIZE )
-            {
-                strcpy(pszWorkBuffer, pszNumber);
-                pszNew = pszWorkBuffer;
-            }
-            else
-                pszNew = strdup(pszNumber);
-            pszNew[pszPoint - pszNumber] = byPoint;
-            return pszNew;
-        }
-    }
-#else
     struct lconv *poLconv = localeconv();
     if ( poLconv
          && poLconv->decimal_point
