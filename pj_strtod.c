@@ -75,6 +75,7 @@ double pj_atof( const char* nptr )
 static char* pj_replace_point_by_locale_point(const char* pszNumber, char point,
                                               char* pszWorkBuffer)
 {
+    /* hi */
     struct lconv *poLconv = localeconv();
     if ( poLconv
          && poLconv->decimal_point
